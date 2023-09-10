@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   db:
-    image: postgres:14.9-alpine
+    image: postgres:14.9
     environment:
       POSTGRES_DB: "car_db"
       POSTGRES_USER: "test"
