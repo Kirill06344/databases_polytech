@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:14.9-alpine
+    environment:
+      POSTGRES_DB: "car_db"
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "test"
+    ports:
+      - "5433:5432"
