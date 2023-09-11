@@ -12,7 +12,7 @@ create table cars
     num        varchar(20),
     color      varchar(20),
     mark       varchar(20),
-    is_foreign varchar(1)
+    is_foreign boolean
 );
 
 create table masters
