@@ -6,6 +6,8 @@ where date_work >= date_trunc('month', current_date - interval '1 month')
 
 -- Вычислить общее услуг и общую сумму стоимости для отечественных и
 -- импортных автомобилей
+select count(*), sum(cost_our) as our_sum, sum(cost_foreign) as foreign_sum
+from services;
 
 
 -- Вывести стоимость обслуживания каждого автомобиля за последний год,
