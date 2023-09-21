@@ -1,7 +1,7 @@
 #делаем backup
 pg_dump -U test -h localhost -p 5432 car_db > ./lab1/car_db.sql
 #подключаемся к СУБД, дропаем базу
-psql -U test -h localhost -p 5432 -d postgres)
+psql -U test -h localhost -p 5432 -d postgres
 \l
 drop database car_db;
 \l
