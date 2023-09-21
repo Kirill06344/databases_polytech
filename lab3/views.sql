@@ -22,14 +22,13 @@ from view_1;
 -- Создать представление, отображающее общий доход мастеров за последний год,
 -- включая мастеров, которые ничего не получили
 
-
 create view view_2 as
 select masters.id,
-       sum(case
+       coalesce(sum(case
                when c.is_foreign
                    then s.cost_foreign
                else s.cost_our
-           end)
+           end), 0)
 from masters
          left join works w on masters.id = w.master_id
          left join services s on w.service_id = s.id
