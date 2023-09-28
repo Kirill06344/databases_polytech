@@ -68,4 +68,4 @@ $$
     language sql;
 
 select *
-from count_service_for_master('Burabek', 'Pavel');
+from count_service_for_master('Barbek', 'Pavel');

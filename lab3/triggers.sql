@@ -29,4 +29,52 @@ values (344, 'sas', 'sasa', true);
 -- один день
 
 
+create or replace function change_date()
+    returns trigger
+    language plpgsql
+as
+$$
+begin
+    if abs(new.date_work - old.date_work) > 1 then
+        raise notice 'You can not change date for more than one day!';
+        return old;
+    end if;
+    return new;
+end;
+$$;
 
+create trigger change_date
+    before update
+    on works
+    for each row
+execute procedure change_date();
+
+update works
+set date_work = '2023-01-12'
+where id = 1;
+
+-- Создать триггер, который при удалении автомобиля,
+-- были какие-то работы, откатывает транзакцию
+
+create or replace function rollback_delete_car()
+    returns trigger
+    language plpgsql
+as
+$$
+begin
+    if (select count(id) from works where car_id = old.id) <> 0 then
+        raise notice 'Car with num % has got works, so can not be deleted!', old.num;
+        return null;
+    end if;
+    return old;
+end;
+$$;
+
+
+create trigger delete_car
+    before delete
+    on cars
+    for each row
+execute procedure rollback_delete_car();
+
+delete from cars where id = 1;
